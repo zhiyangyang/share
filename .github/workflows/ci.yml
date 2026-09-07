@@ -91,11 +91,11 @@ jobs:
         with:
           dotnet-version: '8.0.x'
       - name: Restore packages
-        working-directory: windows
-        run: dotnet restore MeshDrop.sln -p:Platform=x64
+        working-directory: windows/MeshDrop
+        run: dotnet restore -p:Platform=x64
       - name: Build
-        working-directory: windows
-        run: dotnet build MeshDrop.sln -c Release -p:Platform=x64 --no-restore -p:WindowsAppSDKSelfContained=true -p:SelfContained=true -p:RuntimeIdentifier=win-x64
+        working-directory: windows/MeshDrop
+        run: dotnet build -c Release -p:Platform=x64 --no-restore -p:WindowsAppSDKSelfContained=true -p:SelfContained=true -p:RuntimeIdentifier=win-x64
       - name: List build output
         shell: pwsh
         run: |
