@@ -96,11 +96,16 @@ jobs:
       - name: Build
         working-directory: windows
         run: dotnet build MeshDrop.sln -c Release -p:Platform=x64 --no-restore
+      - name: List build output
+        shell: pwsh
+        run: |
+          Write-Host "Build output directory:"
+          Get-ChildItem -Path "windows/MeshDrop/bin/Release" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 20
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: MeshDrop-windows-x64
-          path: windows/MeshDrop/bin/Release/net8.0-windows10.0.19041.0/
+          path: windows/MeshDrop/bin/Release/net8.0-windows10.0.19041.0/win-x64/
           retention-days: 30
 
   protocol-vectors-consistency:
