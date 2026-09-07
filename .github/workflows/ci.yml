@@ -95,17 +95,17 @@ jobs:
         run: dotnet restore MeshDrop.sln -p:Platform=x64
       - name: Build
         working-directory: windows
-        run: dotnet build MeshDrop.sln -c Release -p:Platform=x64 --no-restore
+        run: dotnet build MeshDrop.sln -c Release -p:Platform=x64 --no-restore -p:WindowsAppSDKSelfContained=true -p:SelfContained=true -p:RuntimeIdentifier=win-x64
       - name: List build output
         shell: pwsh
         run: |
           Write-Host "Build output directory:"
-          Get-ChildItem -Path "windows/MeshDrop/bin" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 30
+          Get-ChildItem -Path "windows/MeshDrop/bin" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 40
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: MeshDrop-windows-x64
-          path: windows/MeshDrop/bin/x64/Release/net8.0-windows10.0.19041.0/
+          path: windows/MeshDrop/bin/x64/Release/net8.0-windows10.0.19041.0/win-x64/
           if-no-files-found: warn
           retention-days: 30
 
