@@ -96,6 +96,12 @@ jobs:
       - name: Build
         working-directory: windows
         run: dotnet build MeshDrop.sln -c Release -p:Platform=x64 --no-restore
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: MeshDrop-windows-x64
+          path: windows/MeshDrop/bin/Release/net8.0-windows10.0.19041.0/
+          retention-days: 30
 
   protocol-vectors-consistency:
     name: Protocol · testdata frame_bytes_hex 一致性
